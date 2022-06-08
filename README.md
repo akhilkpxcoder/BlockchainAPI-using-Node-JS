@@ -49,3 +49,14 @@ truffle depoly
 ```
 npm start
 ```
+# Post method Add
+
+```
+http://localhost:8000/add
+```
+
+# Post method Verify
+
+```
+http://localhost:8000/verify
+```
