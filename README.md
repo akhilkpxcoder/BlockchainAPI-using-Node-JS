@@ -2,27 +2,27 @@
 
 This api help to add data to ethereum blockchain and verify the data from the blockchain
 
-#Install NPM
+# Install NPM
 ```
 npm install
 ```
-#Install Truffle
+# Install Truffle
 ```
 npm i -g truffle
 ```
-#Set Execution Policy
+# Set Execution Policy
 ```
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 ```
-#Truffle Build
+# Truffle Build
 ```
 truffle build
 ```
-#Truffle Depoly
+# Truffle Depoly
 ```
 truffle depoly
 ```
-#Start NPM
+# Start NPM
 ```
 npm start
 ```
