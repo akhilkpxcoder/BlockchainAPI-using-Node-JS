@@ -1,5 +1,7 @@
 # BlockchainAPI
 
+This api help to add data to ethereum blockchain and verify the data from the blockchain
+
 #Install NPM
 ```
 npm install
