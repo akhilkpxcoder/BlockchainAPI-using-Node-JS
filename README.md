@@ -54,9 +54,17 @@ npm start
 ```
 http://localhost:8000/add
 ```
+# PostMan Example for Add
+
+![image](https://user-images.githubusercontent.com/98999402/172683789-ae97e3c2-9ea8-4906-be57-ce93996780e3.png)
+
 
 # Post method Verify
 
 ```
 http://localhost:8000/verify
 ```
+# PostMan Example for Verify
+
+![image](https://user-images.githubusercontent.com/98999402/172683949-6fdd5165-ae70-4e58-bd76-eeea5d22522f.png)
+
