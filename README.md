@@ -12,15 +12,18 @@ https://github.com/trufflesuite/ganache-ui/releases/download/v2.5.4/Ganache-2.5.
 # Change PORT 
 Find Ganache PORT number
 
-portnumber.PNG
+![portnumber](https://user-images.githubusercontent.com/98999402/172682368-97ee77c1-d637-43df-89c1-1e84f862f3c0.PNG)
+
 
 Change the PORT number in server.js file
 
-serverjsfile.PNG
+![serverjsfile](https://user-images.githubusercontent.com/98999402/172682411-a83b0f2a-34d2-4846-9fcf-fcba6bcd0ec9.PNG)
+
 
 Change the PORT number in truffle-config.js file
 
-truffleconfigfile.PNG
+![truffleconfigfile](https://user-images.githubusercontent.com/98999402/172682450-b2cab1a9-ca68-4c47-a063-dbf7ece0bcf7.PNG)
+
 
 # Install NPM
 ```
