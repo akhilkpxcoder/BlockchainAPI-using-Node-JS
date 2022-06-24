@@ -33,14 +33,13 @@ contract ProofOfExistence {
         
         hashes[documentHash].timestamp = now  ;
         hashes[documentHash].blocknumber = block.number ;
-        
 
-       
     }
 
     function doesProofExist(bytes32 documentHash) public view returns (bool) {
      return hashes[documentHash].timestamp!=0;
     }
+    
     function returnData(bytes32 documentHash) public view returns(uint256,uint256){
         if (doesProofExist(documentHash)==true){
             return( hashes[documentHash].timestamp,

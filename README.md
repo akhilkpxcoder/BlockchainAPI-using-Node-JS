@@ -52,7 +52,7 @@ npm start
 # Post method Add
 
 ```
-http://localhost:8000/add
+http://localhost:5000/add
 ```
 # PostMan Example for Add
 
@@ -62,7 +62,7 @@ http://localhost:8000/add
 # Post method Verify
 
 ```
-http://localhost:8000/verify
+http://localhost:5000/verify
 ```
 # PostMan Example for Verify
 
