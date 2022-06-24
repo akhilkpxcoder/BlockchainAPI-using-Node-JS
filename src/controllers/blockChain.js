@@ -2,7 +2,7 @@ const Web3 = require("web3"); //used for connect with etherum network
 const sha = require("sha256"); //encrpyt the base64 value
 const fs = require("fs"); //read and write files
 const env = require("../config/env");
-var account = "0x5E830605652fd9ea7Eaa9C8CDFbF30101dae5D24"; //address of etherum wallet
+var account = env.address; //address of etherum wallet
 var proofofexistence;
 const ContractAddress = require("../config/blockChainconfig.json").address;
 //getting json data of smart contract
