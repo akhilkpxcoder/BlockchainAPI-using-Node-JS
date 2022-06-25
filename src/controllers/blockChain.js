@@ -1,22 +1,21 @@
 const Web3 = require("web3"); //used for connect with etherum network
 const sha = require("sha256"); //encrpyt the base64 value
 const fs = require("fs"); //read and write files
-const env = require("../config/env");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const private_keys = ["6c870445e62c5be45ef6f91b5d37e4888f39033e5948a543b9ccb65ccf34e2f5"];
-const provider = () => new HDWalletProvider({
-  privateKeys: private_keys,
-  providerOrUrl: `${env.host}`,
-  numberOfAddresses: 1
-});
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+const env = require("../config/env");
 var account = env.address; //address of etherum wallet
 var proofofexistence;
-const ContractAddress = require("../../blockChainconfig.json").address;
+const ContractAddress = require("../config/blockChainconfig.json").address;
 //getting json data of smart contract 
 let content = JSON.parse(
   fs.readFileSync("./build/contracts/ProofOfExistence.json", "utf8")
 );
+const provider = () => new HDWalletProvider({
+  privateKeys: env.privateKey,
+  providerOrUrl: `${env.host}`,
+  numberOfAddresses: 1
+});
 //connecting to web3
 async function web3Setup() {
     //console.log(content,"content");
@@ -27,13 +26,12 @@ async function web3Setup() {
 }
 //add document to blockchain
 const add = (req, res, next) => {
-  //console.log(req.body);
-  if (req.body.string == null || req.body.string == "undefined") {
+  if (req.body.documentContent == null || req.body.documentContent == "undefined") {
     res.status(400).send({
       error: "Could not get expected keyvalues in the JSON Request Payload",
     });
   } else {
-    let inp = req.body.string;
+    let inp = req.body.documentContent;
     let inpHash = sha(inp);
     proofofexistence.methods
       .doesProofExist("0x" + inpHash)
@@ -81,12 +79,12 @@ const add = (req, res, next) => {
 };
 //verify added document
 const verify = (req, res, next) => {
-  if (req.body.string == null || req.body.string == "undefined") {
+  if (req.body.documentContent == null || req.body.documentContent == "undefined") {
     res.status(400).send({
       error: "Could not get expected keyvalues in the JSON Request Payload",
     });
   } else {
-    let inp = req.body.string;
+    let inp = req.body.documentContent;
     let inpHash = sha(inp);
     proofofexistence.methods
       .doesProofExist("0x" + inpHash)

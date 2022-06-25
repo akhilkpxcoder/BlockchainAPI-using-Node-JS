@@ -12,7 +12,7 @@ module.exports = function(deployer) {
         address: _instance.address
       };
       const jsonString = JSON.stringify(ProofOfExistence);
-      fs.writeFile('./blockChainconfig.json', jsonString, err => {
+      fs.writeFile('./src/config/blockChainconfig.json', jsonString, err => {
         if (err) {
           console.log('Error writing file', err);
         } else {

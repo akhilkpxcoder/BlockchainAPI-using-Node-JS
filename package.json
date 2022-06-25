@@ -12,6 +12,10 @@
     "start": "nodemon index.js",
     "production":"pm2 start index.js"
   },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -28,5 +32,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
+ 
