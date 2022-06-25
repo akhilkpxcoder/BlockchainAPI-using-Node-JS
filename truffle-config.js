@@ -1,4 +1,3 @@
-const env =require("./src/config/env");
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -19,11 +18,12 @@ const env =require("./src/config/env");
  *
  */
 
-// const HDWalletProvider = require('truffle-hdwallet-provider');
-// const infuraKey = "fj4jll3k.....";
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+//const infuraKey = "fj4jll3k.....";
+const private_keys = ["6c870445e62c5be45ef6f91b5d37e4888f39033e5948a543b9ccb65ccf34e2f5"];
+//const fs = require('fs');
+//const mnemonic = "open pride vacant cushion soccer shadow eager omit robust soft armed loan";
+const env = require("./src/config/env");
 
 module.exports = {
   /**
@@ -43,11 +43,11 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    development: {
-      host: env.host, // Localhost (default: none)
-      port: env.port, // Standard Ethereum port (default: none)
-      network_id: '*' // Any network (default: none)
-    }
+    // development: {
+    //   host: env.host, // Localhost (default: none)
+    //   port: env.port, // Standard Ethereum port (default: none)
+    //   network_id: '*' // Any network (default: none)
+    // }
 
     // Another network with more advanced options...
     // advanced: {
@@ -61,14 +61,18 @@ module.exports = {
 
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
-    // ropsten: {
-    // provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/YOUR-PROJECT-ID`),
-    // network_id: 3,       // Ropsten's id
-    // gas: 5500000,        // Ropsten has a lower block limit than mainnet
-    // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-    // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-    // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
-    // },
+    rinkeby: {
+      provider: () => new HDWalletProvider({
+        privateKeys: private_keys,
+        providerOrUrl: `${env.host}`,
+        numberOfAddresses: 1
+      }),
+      network_id: 4, // Ropsten's id
+      gas: 5500000, // Ropsten has a lower block limit than mainnet
+      confirmations: 2, // # of confs to wait between deployments. (default: 0)
+      timeoutBlocks: 20000, // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+    },
 
     // Useful for private networks
     // private: {
@@ -86,15 +90,15 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: '0.4.23', // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.4.23", // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       optimizer: {
         enabled: false,
-        runs: 200
-      }
+        runs: 20000,
+      },
       //  evmVersion: "byzantium"
       // }
-    }
-  }
+    },
+  },
 };

@@ -2,29 +2,32 @@ const Web3 = require("web3"); //used for connect with etherum network
 const sha = require("sha256"); //encrpyt the base64 value
 const fs = require("fs"); //read and write files
 const env = require("../config/env");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const private_keys = ["6c870445e62c5be45ef6f91b5d37e4888f39033e5948a543b9ccb65ccf34e2f5"];
+const provider = () => new HDWalletProvider({
+  privateKeys: private_keys,
+  providerOrUrl: `${env.host}`,
+  numberOfAddresses: 1
+});
+const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 var account = env.address; //address of etherum wallet
 var proofofexistence;
-const ContractAddress = require("../config/blockChainconfig.json").address;
-//getting json data of smart contract
+const ContractAddress = require("../../blockChainconfig.json").address;
+//getting json data of smart contract 
 let content = JSON.parse(
   fs.readFileSync("./build/contracts/ProofOfExistence.json", "utf8")
 );
 //connecting to web3
 async function web3Setup() {
-  if (typeof web3 !== "undefined") {
-    web3 = new Web3(web3.currentProvider);
-  } else {
-    web3 = new Web3(
-      new Web3.providers.HttpProvider(`http://${env.host}:${env.port}`)
-    );
-  }
+    //console.log(content,"content");
+  const web3 = createAlchemyWeb3(`${env.host}`, { writeProvider: provider() });
   proofofexistence = await new web3.eth.Contract(content.abi, ContractAddress);
   console.log("Web3 Connected");
   console.log(ContractAddress);
 }
 //add document to blockchain
 const add = (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   if (req.body.string == null || req.body.string == "undefined") {
     res.status(400).send({
       error: "Could not get expected keyvalues in the JSON Request Payload",
@@ -47,7 +50,7 @@ const add = (req, res, next) => {
             .send({ from: account })
             .then((result) => {
               const tnx = result;
-              if(result)
+              if(tnx)
               {
                 proofofexistence.methods
                 .returnData("0x" + inpHash)
@@ -68,7 +71,9 @@ const add = (req, res, next) => {
               
             })
             .catch((err) => {
-              console.log(err);
+                res.status(400).send({
+                    status: "Failed",
+                  });
             });
         }
       });
@@ -87,13 +92,13 @@ const verify = (req, res, next) => {
       .doesProofExist("0x" + inpHash)
       .call({ from: account })
       .then((result) => {
-        console.log(result);
+        //console.log(result);
         if (result) {
           proofofexistence.methods
             .returnData("0x" + inpHash)
             .call({ from: account })
             .then((result) => {
-              console.log(result[0]);
+              //console.log(result[0]);
               const date = new Date(result[0] * 1000);
               res.status(200).send({
                 status: "Success",
@@ -102,7 +107,6 @@ const verify = (req, res, next) => {
               });
             });
         } else {
-          console.log("here");
           res.status(400).send({
             status: "Failed",
             timestamp: 0,
@@ -112,32 +116,5 @@ const verify = (req, res, next) => {
       });
   }
 };
-var timestampResult;
-// async function timestamp(inpHash) {
-//     var date;
-//        await proofofexistence.methods
-//           .returnData("0x" + inpHash)
-//           .call({ from: account })
-//           .then((result) => {
-//             console.log(result[0], "118");
-//             date = new Date(result[0] * 1000);
-//             return date;
-//           });
-// }
-
-async function promiseAddTimeStamp(success, inpHash) {
-  return await new Promise((resolve, reject) => {
-    var resData;
-    proofofexistence.methods
-      .returnData("0x" + inpHash)
-      .call({ from: account })
-      .then((result) => {
-        resData = result[0];
-      });
-    setTimeout(() => {
-      success ? resolve(resData) : reject("");
-    }, 3000);
-  });
-}
 
 module.exports = { add, verify, web3Setup };

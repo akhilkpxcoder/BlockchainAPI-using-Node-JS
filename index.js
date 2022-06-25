@@ -7,13 +7,14 @@ const { web3Setup } = require("./src/controllers/blockChain");
 
 //assign
 const app = express();
+web3Setup();
 const PORT = process.env.PORT || 5000;
 
 //use
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-web3Setup();
+
 app.use("/", blockChainRouter);
 
 //route
