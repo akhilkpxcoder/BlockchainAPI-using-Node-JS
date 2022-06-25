@@ -9,8 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "blockchain": "node index.js",
-    "start": "node index.js",
-    "production":"pm2 start index.js"
+    "production": "node index.js",
+    "start":"pm2 start index.js"
   },
   "keywords": [
     "example",
