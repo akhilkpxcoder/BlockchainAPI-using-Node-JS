@@ -9,7 +9,7 @@ var proofofexistence;
 const ContractAddress = require("../config/blockChainconfig.json").address;
 //getting json data of smart contract 
 let content = JSON.parse(
-  fs.readFileSync("./build/contracts/ProofOfExistence.json", "utf8")
+  fs.readFileSync("../../build/contracts/ProofOfExistence.json", "utf8")
 );
 const provider = () => new HDWalletProvider({
   privateKeys: env.privateKey,
