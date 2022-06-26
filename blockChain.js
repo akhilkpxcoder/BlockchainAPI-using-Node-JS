@@ -1,7 +1,7 @@
 const Web3 = require("web3"); //used for connect with etherum network
 const sha = require("sha256"); //encrpyt the base64 value
 const fs = require("fs"); //read and write files
-const moment = require("moment");
+const moment = require("moment-timezone");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const env = require("./env");
@@ -60,8 +60,9 @@ const add = (req, res, next) => {
                   .then((result) => {
                     if (result) {
                       let date = moment
-                        .unix(result[0]).tz('Asia/Kolkata')
-                        .format('llll');
+                        .unix(result[0])
+                        .tz("Asia/Kolkata")
+                        .format("llll");
                       tnx["timestamp"] = date.toString();
                       const response = {
                         transaction: tnx,
@@ -106,7 +107,10 @@ const verify = (req, res, next) => {
             .call({ from: account })
             .then((result) => {
               //console.log(result[0]);
-              const date = moment.unix(result[0]).format('llll');
+              const date = moment
+                .unix(result[0])
+                .tz("Asia/Kolkata")
+                .format("llll");
               res.status(200).send({
                 status: "Success",
                 timestamp: date.toString(),
