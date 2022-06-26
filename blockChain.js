@@ -60,7 +60,7 @@ const add = (req, res, next) => {
                   .then((result) => {
                     if (result) {
                       let date = moment
-                        .unix(result[0])
+                        .unix(result[0]).tz('Asia/Kolkata')
                         .format('llll');
                       tnx["timestamp"] = date.toString();
                       const response = {
