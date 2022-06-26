@@ -20,10 +20,9 @@
 
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 //const infuraKey = "fj4jll3k.....";
-const private_keys = ["6c870445e62c5be45ef6f91b5d37e4888f39033e5948a543b9ccb65ccf34e2f5"];
 //const fs = require('fs');
 //const mnemonic = "open pride vacant cushion soccer shadow eager omit robust soft armed loan";
-const env = require("./src/config/env");
+const env = require("./env");
 
 module.exports = {
   /**
@@ -63,7 +62,7 @@ module.exports = {
     // NB: It's important to wrap the provider as a function.
     rinkeby: {
       provider: () => new HDWalletProvider({
-        privateKeys: private_keys,
+        privateKeys: `${env.privateKey}`,
         providerOrUrl: `${env.host}`,
         numberOfAddresses: 1
       }),

@@ -3,10 +3,10 @@ const sha = require("sha256"); //encrpyt the base64 value
 const fs = require("fs"); //read and write files
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-const env = require("../config/env");
+const env = require("./env");
 var account = env.address; //address of etherum wallet
 var proofofexistence;
-const ContractAddress = require("../config/blockChainconfig.json").address;
+const ContractAddress = require("./blockChainconfig.json").address;
 //getting json data of smart contract 
 let content = JSON.parse(
   fs.readFileSync("./build/contracts/ProofOfExistence.json", "utf8")
