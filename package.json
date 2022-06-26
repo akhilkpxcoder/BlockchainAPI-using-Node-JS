@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "production": "node index.js",
-    "start":"nodemon index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [
     "example",
@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "hardhat": "^2.9.9",
+    "moment": "^2.29.3",
     "sha256": "^0.2.0",
     "web3": "^1.2.5"
   },
@@ -36,4 +37,3 @@
     "node": "16.x"
   }
 }
- 
